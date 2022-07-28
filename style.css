@@ -11,6 +11,11 @@
   --bg-color-secondary: hsla(195, 91%, 25%, 1);
 }
 
+body {
+  background-color: black;
+  color: white;
+}
+
 .page {
   width: 100rem;
   margin: 0 auto;
@@ -27,6 +32,7 @@
 
 header h1 {
   text-transform: uppercase;
+  color: white;
 }
 
 .search {
