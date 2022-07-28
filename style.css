@@ -6,9 +6,75 @@
 
 :root {
   font-size: 62.5%;
+
+  --bg-color-primary: hsl(191, 65%, 7%);
+  --bg-color-secondary: hsla(195, 91%, 25%, 1);
 }
 
 .page {
   width: 100rem;
   margin: 0 auto;
+
+  padding: 6rem;
+}
+
+ header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10rem;
+}
+
+header h1 {
+  text-transform: uppercase;
+}
+
+.search {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+
+.search input {
+  width: 30rem;
+  padding: 1rem;
+
+  border-radius: 5px;
+
+  background-color: var(--bg-color-primary);
+  color: white;
+}
+
+.search input::placeholder {
+  color: whitesmoke
+}
+
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.search button{
+  padding: 1rem;
+  width: 10rem;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  background-color: var(--bg-color-secondary);
+  color: white;
+}
+
+.search button:hover {
+  --bg-color-secondary: rgb(2, 58, 77);
 }
