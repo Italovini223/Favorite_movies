@@ -10,6 +10,8 @@
   --bg-color-primary: hsl(191, 65%, 7%);
   --bg-color-secondary: hsla(195, 91%, 25%, 1);
   --bg-color-tertiary: hsla(194, 72%, 13%, 1);
+  --bg-tr-odd:hsla(195, 61%, 6%, 0.5);
+  --bg-tr-even: hsl(192, 65%, 7%);
 }
 
 body {
@@ -108,4 +110,48 @@ table th:first-child {
 
 table th:last-child {
   border-top-right-radius: 12px;
+}
+
+table tr:nth-child(odd) {
+  background-color: var(--bg-tr-odd);
+}
+
+table tr:nth-child(even) {
+  background-color: var(--bg-tr-even);
+}
+
+table td {
+  text-align: left;
+  padding: 2rem;
+
+}
+
+td.MovieName {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.MovieName img {
+  width: 7rem;
+  height: 7rem;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+.MovieName a {
+  text-decoration: none;
+}
+
+.MovieName a p {
+  color: white;
+}
+
+.remove button {
+  background: transparent;
+  color: red;
+
+  cursor: pointer;
 }
