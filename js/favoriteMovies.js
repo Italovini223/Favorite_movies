@@ -16,6 +16,14 @@ export  class favorite {
 
     this.dataBase = dataBase
   }
+
+  delete(movie) {
+    const filteredDatabase = this.dataBase.filter(entry => entry.Title !== movie)
+
+    this.dataBase = filteredDatabase;
+
+    this.update()
+  }
 }
 
 export class favoritesView extends favorite {
@@ -33,11 +41,20 @@ export class favoritesView extends favorite {
 
       tr.querySelector(".MovieName img").src = movie.Poster
       tr.querySelector(".MovieName a").href = `https://www.adorocinema.com/pesquisar/?q=${movie.Title}`
-     tr.querySelector(".MovieName p").textContent = movie.Title
+      tr.querySelector(".MovieName p").textContent = movie.Title
+
+      tr.querySelector(".remove").onclick = () => {
+        const remove = confirm("Deseja apagar este filme ?")
+
+        if(remove) {
+          this.delete(movie.Title)
+        }
+      }
 
 
       this.tbody.append(tr)
     })
+
   }
 
   createTr() {
@@ -52,8 +69,8 @@ export class favoritesView extends favorite {
       </td>
       <td class="year">1987</td>
       <td class="Runtime">198min</td>
-      <td class="remove">
-        <button>X</button>
+      <td>
+        <button class="remove">X</button>
       </td>
     `
 
