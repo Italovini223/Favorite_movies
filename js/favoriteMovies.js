@@ -11,10 +11,11 @@ export  class favorite {
 
   async add(movieName) {
     try {
-      const movieExist = this.dataBase.find(entry => entry.name === movieName)
+      const movieExist = this.dataBase.find(entry => entry.Title === movieName)
+
 
       if(movieExist) {
-        throw new Error("Movie already exists")
+        throw new Error("this movie already exists")
       }
 
       const movie = await getMovie.search(movieName);
@@ -45,6 +46,7 @@ export  class favorite {
     this.dataBase = filteredDatabase;
 
     this.update()
+    this.save()
   }
 }
 
@@ -97,8 +99,8 @@ export class favoritesView extends favorite {
 
     tr.innerHTML = `
         <td class="MovieName">
-        <img src="https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg%22" alt="poster do titanic">
-        <a href="">
+        <img src="">
+        <a target="_blank" href="">
           <p>Titanic</p>
         </a>
       </td>
