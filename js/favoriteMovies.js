@@ -1,20 +1,23 @@
+import { getMovie } from "./getMovie.js";
 export  class favorite {
   constructor(router) {
     this.router = document.querySelector(router);
-    this.add()
+    this.load()
   }
 
-  add() {
-    const dataBase = [
-      {
-        Title: "titanic",
-        Year: "1980",
-        Runtime: "115min",
-        Poster: "https://m.media-amazon.com/images/M/MV5BNTQyZGI0NDgtYTM0ZC00NTdkLTk2OTItYTgwYmYwNjZlNDRlXkEyXkFqcGdeQXVyMTY5Nzc4MDY@._V1_SX300.jpg"
-      }
-    ]
+  save() {
+    localStorage.setItem("@movies-favorites", JSON.stringify(this.dataBase))
+  }
 
-    this.dataBase = dataBase
+  async add(movieName) {
+    const movie = await getMovie.search(movieName);
+    this.dataBase = [movie,...this.dataBase]
+    this.update()
+    this.save()
+  }
+
+  load() {
+   this.dataBase= JSON.parse(localStorage.getItem("@movies-favorites")) || []
   }
 
   delete(movie) {
@@ -31,10 +34,21 @@ export class favoritesView extends favorite {
     super(router);
     this.tbody = this.router.querySelector("table tbody")
     this.update();
+    this.forAdd()
+  }
+
+  forAdd() {
+    const addButton = this.router.querySelector(".search button");
+
+    addButton.onclick = () => {
+    const {value} = this.router.querySelector(".search input");
+    this.add(value)
+    }
   }
 
   update() {
     this.removeAllTr()
+    
 
     this.dataBase.forEach(movie => {
       const tr = this.createTr()
@@ -42,6 +56,8 @@ export class favoritesView extends favorite {
       tr.querySelector(".MovieName img").src = movie.Poster
       tr.querySelector(".MovieName a").href = `https://www.adorocinema.com/pesquisar/?q=${movie.Title}`
       tr.querySelector(".MovieName p").textContent = movie.Title
+      tr.querySelector(".year").textContent = movie.Year
+      tr.querySelector(".Runtime").textContent = movie.Runtime
 
       tr.querySelector(".remove").onclick = () => {
         const remove = confirm("Deseja apagar este filme ?")
@@ -67,8 +83,8 @@ export class favoritesView extends favorite {
           <p>Titanic</p>
         </a>
       </td>
-      <td class="year">1987</td>
-      <td class="Runtime">198min</td>
+      <td class="year"></td>
+      <td class="Runtime"></td>
       <td>
         <button class="remove">X</button>
       </td>
