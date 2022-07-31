@@ -10,11 +10,30 @@ export  class favorite {
   }
 
   async add(movieName) {
-    const movie = await getMovie.search(movieName);
-    this.dataBase = [movie,...this.dataBase]
-    this.update()
-    this.save()
-  }
+    try {
+      const movieExist = this.dataBase.find(entry => entry.name === movieName)
+
+      if(movieExist) {
+        throw new Error("Movie already exists")
+      }
+
+      const movie = await getMovie.search(movieName);
+
+      
+
+      if(movie.Title === undefined) {
+        throw new Error("this movie does not exist")
+      }
+
+      this.dataBase = [movie,...this.dataBase]
+      this.update()
+      this.save()
+
+    } catch(error) {
+      alert(error.message)
+    }
+    
+  }   
 
   load() {
    this.dataBase= JSON.parse(localStorage.getItem("@movies-favorites")) || []
